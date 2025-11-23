@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://dbdyl0pjlu4x5"]
+
+[ext_resource type="PackedScene" uid="uid://biow84o3kbgro" path="res://scenes/BUILDING/chao.tscn" id="1_3w1fr"]
+
+[node name="rampa" type="Node3D"]
+
+[node name="chao" parent="." instance=ExtResource("1_3w1fr")]
+transform = Transform3D(3.4641016, -0.125, 0, 2, 0.21650635, 0, 0, 0, 4, 0, 0, 0)

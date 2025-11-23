@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://b31o3sfuacmyb"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_2d3o8"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_030df"]
+
+[node name="inimigo" type="Node3D"]
+
+[node name="RigidBody3D" type="RigidBody3D" parent="."]
+mass = 1000.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.008338571, 0)
+shape = SubResource("CapsuleShape3D_2d3o8")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0062245727, 0)
+mesh = SubResource("CapsuleMesh_030df")
+skeleton = NodePath("../CollisionShape3D")

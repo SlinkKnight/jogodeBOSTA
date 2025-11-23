@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://c0a5krbfucvuu"]
+
+[ext_resource type="PackedScene" uid="uid://biow84o3kbgro" path="res://scenes/BUILDING/chao.tscn" id="1_fpk4w"]
+[ext_resource type="PackedScene" uid="uid://pm0o7aqy0c4v" path="res://scenes/BUILDING/pilar.tscn" id="2_ytx7b"]
+[ext_resource type="PackedScene" uid="uid://dbdyl0pjlu4x5" path="res://scenes/BUILDING/rampa.tscn" id="3_ljlor"]
+
+[node name="predio1" type="Node3D"]
+
+[node name="chao" parent="." instance=ExtResource("1_fpk4w")]
+transform = Transform3D(30, 0, 0, 0, 0.5, 0, 0, 0, 30, 0, 0, 0)
+
+[node name="pilar" parent="." instance=ExtResource("2_ytx7b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 4, 11)
+
+[node name="pilar2" parent="." instance=ExtResource("2_ytx7b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 4, -11)
+
+[node name="pilar3" parent="." instance=ExtResource("2_ytx7b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 4, -11)
+
+[node name="pilar4" parent="." instance=ExtResource("2_ytx7b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 4, 11)
+
+[node name="chao2" parent="." instance=ExtResource("1_fpk4w")]
+transform = Transform3D(30, 0, 0, 0, 0.5, 0, 0, 0, 30, 0, 8, 0)
+
+[node name="rampa" parent="." instance=ExtResource("3_ljlor")]
+transform = Transform3D(-2.1855695e-07, 0, 2, 0, 5, 0, -5, 0, -8.742278e-08, -19, 3, 7)
+
+[node name="chao3" parent="." instance=ExtResource("1_fpk4w")]
+transform = Transform3D(8.360001, 0, 0, 0, 0.25, 0, 0, 0, 12.400001, -19, 8, -7)

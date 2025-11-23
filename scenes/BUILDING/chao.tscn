@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://biow84o3kbgro"]
+
+[ext_resource type="Texture2D" uid="uid://dugfvmj6ova70" path="res://assets/textures/128x128/Stone/Stone_07-128x128.png" id="1_1nti3"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_b0fut"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_50h76"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q3ga7"]
+albedo_texture = ExtResource("1_1nti3")
+uv1_world_triplanar = true
+texture_filter = 0
+
+[node name="chao" type="Node3D"]
+transform = Transform3D(4, 0, 0, 0, 0.25, 0, 0, 0, 4, 0, 0, 0)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_b0fut")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+mesh = SubResource("BoxMesh_50h76")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_q3ga7")

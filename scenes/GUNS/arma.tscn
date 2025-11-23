@@ -1,0 +1,78 @@
+[gd_scene load_steps=8 format=3 uid="uid://sxtfp2cn45l2"]
+
+[ext_resource type="PackedScene" uid="uid://cdgtd50vplcgr" path="res://assets/models/M16.glb" id="1_0fmgw"]
+[ext_resource type="Script" uid="uid://b1l06tx5rk1w1" path="res://scripts/arma.gd" id="1_rh7jv"]
+[ext_resource type="AudioStream" uid="uid://be87a51ivijql" path="res://assets/sound/pew-pew-lame-sound-effect.mp3" id="3_p6xlu"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rh7jv"]
+albedo_color = Color(0.25202742, 0.2520277, 0.25202757, 1)
+
+[sub_resource type="Animation" id="Animation_6ytve"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("M16:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.16644132, -0.1494075, 0.2588626)]
+}
+
+[sub_resource type="Animation" id="Animation_p6xlu"]
+resource_name = "gunRecoil"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("M16:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.23333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 0.259)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tqxg2"]
+_data = {
+&"RESET": SubResource("Animation_6ytve"),
+&"gunRecoil": SubResource("Animation_p6xlu")
+}
+
+[node name="arma" type="Node3D"]
+script = ExtResource("1_rh7jv")
+
+[node name="M16" parent="." instance=ExtResource("1_0fmgw")]
+transform = Transform3D(-0.002878243, 0.00078527676, -0.19997774, 0.0034485385, 0.19996895, 0.00073560816, 0.19994949, -0.0034375628, -0.0028913487, -0.16644132, -0.1494075, 0.2588626)
+
+[node name="Cube" parent="M16" index="0"]
+transform = Transform3D(0.99999964, 0, -1.8626451e-08, -5.9604645e-08, 0.1567216, -0.15672152, 0, 0.15672156, 0.1567216, -0.29576898, 0.6303754, -0.6448002)
+surface_material_override/0 = SubResource("StandardMaterial3D_rh7jv")
+
+[node name="Cube_001" parent="M16" index="1"]
+transform = Transform3D(-0.1674918, -1.3969839e-09, 0, -6.9849193e-10, -0.4059842, -1.36424205e-11, 0, 6.548362e-11, -0.050550282, -1.7430156, 0.031639278, -0.69272006)
+surface_material_override/0 = SubResource("StandardMaterial3D_rh7jv")
+
+[node name="barrel" type="Node3D" parent="M16"]
+transform = Transform3D(-4.371134e-08, 0, 0.9999998, 0, 1, 0, -0.99999887, 0, -4.371138e-08, 1.6391943, 0.64049625, -0.6424133)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_tqxg2")
+}
+
+[node name="FireTimer" type="Timer" parent="."]
+wait_time = 0.052
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_p6xlu")
+max_polyphony = 999
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
+target_position = Vector3(0, 0, -1)
+
+[editable path="M16"]
