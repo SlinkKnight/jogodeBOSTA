@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://cyk5f350ymt1u"]
+
+[ext_resource type="PackedScene" uid="uid://c15w2ag2mbept" path="res://scenes/lobby.tscn" id="1_eq701"]
+[ext_resource type="PackedScene" uid="uid://gvvsrm3j5qrg" path="res://scenes/3DsinglePlayer.tscn" id="2_um401"]
+
+[node name="Controller" type="Node"]
+
+[node name="LOBBY" parent="." instance=ExtResource("1_eq701")]
+offset_right = 3.0
+
+[node name="3DsinglePlayer" parent="." instance=ExtResource("2_um401")]

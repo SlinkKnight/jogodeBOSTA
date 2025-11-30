@@ -14,6 +14,7 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_right = 9.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -21,7 +22,7 @@ grow_vertical = 2
 layout_mode = 0
 offset_left = -6.0
 offset_top = -3.0
-offset_right = 1279.0
+offset_right = 1287.0
 offset_bottom = 962.0
 texture = ExtResource("1_o1atq")
 expand_mode = 1
@@ -55,7 +56,7 @@ layout_mode = 0
 offset_left = 80.0
 offset_top = 464.0
 offset_right = 559.0
-offset_bottom = 558.0
+offset_bottom = 547.0
 
 [node name="Button" type="Button" parent="MarginContainer2"]
 layout_mode = 2

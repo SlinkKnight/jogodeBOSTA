@@ -38,7 +38,7 @@ shader_parameter/dither_amount = 0.5
 flip_faces = true
 size = Vector2(2, 2)
 
-[node name="Game" type="Node3D"]
+[node name="3DsinglePlayer" type="Node3D"]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.47255066, 0.33726028, -0.8142182, 0, 0.9238795, 0.38268346, 0.8813035, -0.18083732, 0.43657988, 0, 0, 0)

@@ -342,6 +342,7 @@ outline_size = 1
 outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="SystemFont" id="SystemFont_008wp"]
+subpixel_positioning = 0
 
 [sub_resource type="LabelSettings" id="LabelSettings_13ro1"]
 font = SubResource("SystemFont_008wp")
