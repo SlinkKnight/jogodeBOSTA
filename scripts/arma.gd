@@ -1,10 +1,12 @@
-extends Node3D
+class_name weaponController extends Node3D
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var fire_timer: Timer = $FireTimer
 @onready var audio_player: AudioStreamPlayer = $AudioStreamPlayer
 @onready var barrel: Node3D = $"../../barrel"
 @onready var ray: RayCast3D = $RayCast3D
+@onready var arma: weaponController = $"."
+@onready var hud: HUD = $"../../../../../HUD"
 
 @export var fire_rate := 0.12   # tempo entre tiros (debounce)
 @export var max_distance := 200.0
@@ -12,8 +14,13 @@ extends Node3D
 var can_shoot := true
 var shoot_held := false
 
+@export var ammo = 20;
+
+signal gunFired
 
 func _ready():
+	for p in get_tree().get_nodes_in_group("pickups"):
+		p.refil.connect(_on_refil)
 	fire_timer.one_shot = true
 	fire_timer.wait_time = fire_rate
 	fire_timer.timeout.connect(_on_fire_timer_timeout)
@@ -23,19 +30,20 @@ func _ready():
 
 
 func _physics_process(_delta):
+	hud.displayAMMO(ammo);
 	# Clique inicial
 	if Input.is_action_just_pressed("shoot"):
 		shoot_held = true
 		try_shoot()
-
+	
 	shoot_held = Input.is_action_pressed("shoot")
 
 
 func try_shoot():
 	if not can_shoot:
 		return
-
-	shoot()
+	if ammo > 0:
+		shoot()
 	can_shoot = false
 	fire_timer.start()
 
@@ -43,10 +51,14 @@ func try_shoot():
 func shoot():
 	animation_player.play("gunRecoil")
 	animation_player.seek(0, true)
-
+	
+	gunFired.emit()
 	audio_player.play()
 	perform_raycast()
+	ammo = ammo - 1;
 
+func _on_refil():
+	ammo = 20;
 
 func perform_raycast():
 	ray.force_raycast_update()

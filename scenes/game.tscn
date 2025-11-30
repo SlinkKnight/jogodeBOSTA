@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://cqfgnbt5ioaj4" path="res://scenes/MAPS/ilha.tscn" id="2_yqjtg"]
 [ext_resource type="PackedScene" uid="uid://c0a5krbfucvuu" path="res://scenes/BUILDING/predio_1.tscn" id="3_lnu2h"]
 [ext_resource type="Shader" uid="uid://d0ap8stfy4642" path="res://shaders/ps1.gdshader" id="4_lbhrr"]
-[ext_resource type="PackedScene" uid="uid://b31o3sfuacmyb" path="res://scenes/CHARACTERS/inimigo.tscn" id="5_iywne"]
+[ext_resource type="PackedScene" uid="uid://b31o3sfuacmyb" path="res://scenes/CHARACTERS/pickup.tscn" id="5_iywne"]
 [ext_resource type="PackedScene" uid="uid://bwggrf7sbmkcv" path="res://scenes/PlayerCharacter/PlayerCharacterScene.tscn" id="5_p57ef"]
 [ext_resource type="AudioStream" uid="uid://c0ls41qo4lm1t" path="res://assets/sound/winter-wind-402331.mp3" id="6_p57ef"]
 
@@ -22,8 +22,12 @@ radiance_size = 2
 background_mode = 2
 sky = SubResource("Sky_lnu2h")
 ambient_light_color = Color(0.4652294, 0.34342623, 0.11550174, 1)
+ambient_light_energy = 1.97
 reflected_light_source = 1
 tonemap_mode = 2
+tonemap_white = 0.52
+adjustment_enabled = true
+adjustment_contrast = 1.1
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_iywne"]
 render_priority = 0
@@ -52,7 +56,8 @@ extra_cull_margin = 16384.0
 mesh = SubResource("QuadMesh_p57ef")
 
 [node name="PlayerCharacter" parent="." instance=ExtResource("5_p57ef")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.059719, 9.955693, 6.6213484)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42.464115, 9.955693, -18.717094)
+bunnyHopDmsIncre = 2.0
 
 [node name="Mapa1" type="Node3D" parent="."]
 
@@ -62,8 +67,8 @@ transform = Transform3D(35.822765, 0, 0, 0, 35.822765, 0, 0, 0, 35.822765, 0, 0,
 [node name="predio1" parent="Mapa1" instance=ExtResource("3_lnu2h")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -47.827427, 0.05168748, -44.235283)
 
-[node name="inimigo" parent="Mapa1" instance=ExtResource("5_iywne")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -56.247856, 1.2100108, -32.350674)
+[node name="pickup" parent="Mapa1" instance=ExtResource("5_iywne")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -55.591927, 1.3220987, -26.507856)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_p57ef")

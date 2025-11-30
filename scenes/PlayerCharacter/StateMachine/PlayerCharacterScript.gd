@@ -93,22 +93,11 @@ func _ready():
 	nbJumpsInAirAllowedRef = nbJumpsInAirAllowed
 	coyoteJumpCooldownRef = coyoteJumpCooldown
 	
-func _process(_delta: float):
-	displayProperties()
-	
 func _physics_process(_delta : float):
 	modifyPhysicsProperties()
 	
 	move_and_slide()
-	
-func displayProperties():
-	#display properties on the hud
-	if hud != null:
-		hud.displayCurrentState(stateMachine.currStateName)
-		hud.displayDesiredMoveSpeed(desiredMoveSpeed)
-		hud.displayVelocity(velocity.length())
-		hud.displayNbJumpsInAirAllowed(nbJumpsInAirAllowed)
-		
+
 func modifyPhysicsProperties():
 	lastFramePosition = position #get play char position every frame
 	lastFrameVelocity = velocity #get play char velocity every frame

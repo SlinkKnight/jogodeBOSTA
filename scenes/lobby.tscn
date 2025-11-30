@@ -1,0 +1,61 @@
+[gd_scene load_steps=3 format=3 uid="uid://c15w2ag2mbept"]
+
+[ext_resource type="Texture2D" uid="uid://b7c1v50fpv6a4" path="res://assets/textures/back.png" id="1_o1atq"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_o1atq"]
+font_size = 60
+outline_size = 10
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 0
+shadow_offset = Vector2(1.1, 1)
+
+[node name="LOBBY" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = -6.0
+offset_top = -3.0
+offset_right = 1279.0
+offset_bottom = 962.0
+texture = ExtResource("1_o1atq")
+expand_mode = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 72.0
+offset_top = 238.0
+offset_right = 562.0
+offset_bottom = 430.0
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "TITULO DO JOGO
+"
+label_settings = SubResource("LabelSettings_o1atq")
+horizontal_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 0
+offset_left = 80.0
+offset_top = 356.0
+offset_right = 559.0
+offset_bottom = 438.0
+
+[node name="Button" type="Button" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="."]
+layout_mode = 0
+offset_left = 80.0
+offset_top = 464.0
+offset_right = 559.0
+offset_bottom = 558.0
+
+[node name="Button" type="Button" parent="MarginContainer2"]
+layout_mode = 2

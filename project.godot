@@ -29,7 +29,7 @@ project/assembly_name="jogo de bosta"
 
 [editor_plugins]
 
-enabled=PackedStringArray()
+enabled=PackedStringArray("res://addons/tube/plugin.cfg")
 
 [input]
 
