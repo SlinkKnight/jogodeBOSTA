@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://bcv2qpy68okfs"]
+
+[ext_resource type="PackedScene" uid="uid://c15w2ag2mbept" path="res://scenes/lobby.tscn" id="1_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://gvvsrm3j5qrg" path="res://scenes/3Dmultiplayer.tscn" id="2_h2yge"]
+
+[node name="Main" type="Node3D"]
+
+[node name="LOBBY" parent="." instance=ExtResource("1_0xm2m")]
+
+[node name="3DsinglePlayer" parent="." instance=ExtResource("2_h2yge")]
