@@ -81,8 +81,35 @@ var coyoteJumpOn : bool = false
 @onready var hud : CanvasLayer = $HUD
 @onready var ceilingCheck : RayCast3D = $Raycasts/CeilingCheck
 @onready var floorCheck : RayCast3D = $Raycasts/FloorCheck
+@onready var camera: Camera3D = $CameraHolder/recoil/Camera
+
+@export var max_health := 100
+var health := max_health
+
+@rpc("authority")
+func take_damage(amount: int):
+	health -= amount
+	print("PLAYER", name, "TOOK DAMAGE:", amount, "HP:", health)
+
+	if health <= 0:
+		die()
+
+func die():
+	print("PLAYER", name, "DIED")
+	queue_free() # depois você troca por respawn
+
+
+func _enter_tree():
+	set_multiplayer_authority(name.to_int())
 
 func _ready():
+	add_to_group("players")
+	if is_multiplayer_authority():
+		camera.current = true
+		hud.visible = true
+	else:
+		camera.current = false
+		hud.visible = false
 	#set move variables, and value references
 	moveSpeed = walkSpeed
 	moveAccel = walkAccel
@@ -93,10 +120,16 @@ func _ready():
 	nbJumpsInAirAllowedRef = nbJumpsInAirAllowed
 	coyoteJumpCooldownRef = coyoteJumpCooldown
 	
-func _physics_process(_delta : float):
-	modifyPhysicsProperties()
+@rpc("any_peer", "call_local", "reliable")
+func rpc_apply_spawn(t: Transform3D):
+	global_transform = t
+	velocity = Vector3.ZERO
+	print("SPAWN RPC APPLIED:", name, global_position)
 	
-	move_and_slide()
+func _physics_process(_delta : float):
+	if is_multiplayer_authority():
+		modifyPhysicsProperties()
+		move_and_slide()
 
 func modifyPhysicsProperties():
 	lastFramePosition = position #get play char position every frame

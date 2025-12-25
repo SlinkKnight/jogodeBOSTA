@@ -3,7 +3,6 @@ extends CanvasLayer
 class_name HUD
 
 #label references variables
-@onready var currentStateLT = %CurrentStateLabelText
 @onready var framesPerSecondLT = %FramesPerSecondLabelText
 @onready var ammoLT: Label = %AMMOLabelText
 

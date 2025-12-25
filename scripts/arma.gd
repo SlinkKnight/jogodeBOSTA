@@ -7,6 +7,7 @@ class_name weaponController extends Node3D
 @onready var ray: RayCast3D = $RayCast3D
 @onready var arma: weaponController = $"."
 @onready var hud: HUD = $"../../../../../HUD"
+@onready var player_character: PlayerCharacter = $"../../../../.."
 
 @export var fire_rate := 0.12   # tempo entre tiros (debounce)
 @export var max_distance := 200.0
@@ -30,6 +31,8 @@ func _ready():
 
 
 func _physics_process(_delta):
+	if not is_multiplayer_authority():
+		return
 	hud.displayAMMO(ammo);
 	# Clique inicial
 	if Input.is_action_just_pressed("shoot"):
@@ -59,18 +62,50 @@ func shoot():
 
 func _on_refil():
 	ammo = 20;
+	
+func get_player_from_collider(collider: Node) -> PlayerCharacter:
+	var node := collider
+	while node:
+		if node is PlayerCharacter:
+			return node
+		node = node.get_parent()
+	return null
 
 func perform_raycast():
+	ray.collision_mask = (1 << 0) | (1 << 1)
 	ray.force_raycast_update()
 	ray.global_transform = barrel.global_transform
-	ray.target_position = Vector3(0, 0, -1) * 200
+	ray.target_position = Vector3(0, 0, -1) * max_distance
 	ray.force_raycast_update()
 
 	if ray.is_colliding():
 		var obj = ray.get_collider()
 		var point = ray.get_collision_point()
 		var normal = ray.get_collision_normal()
-		BulletDecalPool.spawn_bullet_decal(point, normal, obj, ray.global_basis)
+		var player = get_player_from_collider(obj)
+
+		BulletDecalPool.spawn_bullet_decal(
+			point, normal, obj, ray.global_basis
+		)
+
+		if player:
+			if multiplayer.is_server():
+				# Servidor aplica dano direto
+				player.take_damage(20)
+			else:
+				# Cliente manda pedido de dano para o servidor
+				request_damage.rpc_id(1, player.get_multiplayer_authority(), 20)
+
+
+@rpc("any_peer")
+func request_damage(target_id: int, damage: int):
+	if not multiplayer.is_server():
+		return
+	# Encontrando o jogador pelo peer ID
+	for p in get_tree().get_nodes_in_group("players"):
+		if p.get_multiplayer_authority() == target_id:
+			p.take_damage(damage)
+			return
 
 
 func _on_fire_timer_timeout():

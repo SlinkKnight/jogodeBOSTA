@@ -40,18 +40,21 @@ var headBobValue : float
 @export_group("Mouse variables")
 var mouseFree : bool = false
 
-
 #references variables
 @onready var playChar : PlayerCharacter = $".."
 @onready var hud : CanvasLayer = $"../HUD"
 @onready var camera: Camera3D = $recoil/Camera
 
 func _ready():
+	if not playChar.is_multiplayer_authority():
+		return
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED) #set mouse mode as captured
 	
 	camera.fov = startFOV
 	
 func _unhandled_input(event):
+	if not playChar.is_multiplayer_authority():
+		return
 	#manage camera rotation (360 on x axis, blocked at specified values on y axis, to not having the character do a complete head turn, which will be kinda weird)
 	if event is InputEventMouseMotion:
 		rotate_y(-event.relative.x * (XAxisSensibility / 10))
@@ -59,6 +62,8 @@ func _unhandled_input(event):
 		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(maxUpAngleView), deg_to_rad(maxDownAngleView))
 		
 func _process(delta):
+	if not playChar.is_multiplayer_authority():
+		return
 	applies(delta)
 	
 	cameraBob(delta)

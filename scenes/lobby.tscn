@@ -1,13 +1,28 @@
-[gd_scene load_steps=3 format=3 uid="uid://c15w2ag2mbept"]
+[gd_scene load_steps=6 format=3 uid="uid://c15w2ag2mbept"]
 
 [ext_resource type="Texture2D" uid="uid://b7c1v50fpv6a4" path="res://assets/textures/back.png" id="1_o1atq"]
 
+[sub_resource type="SystemFont" id="SystemFont_o1atq"]
+font_names = PackedStringArray("Constantia")
+subpixel_positioning = 0
+
 [sub_resource type="LabelSettings" id="LabelSettings_o1atq"]
+font = SubResource("SystemFont_o1atq")
 font_size = 60
 outline_size = 10
 outline_color = Color(0, 0, 0, 1)
 shadow_size = 0
 shadow_offset = Vector2(1.1, 1)
+
+[sub_resource type="SystemFont" id="SystemFont_5gu6x"]
+font_names = PackedStringArray("Constantia")
+subpixel_positioning = 0
+
+[sub_resource type="LabelSettings" id="LabelSettings_q60fs"]
+font = SubResource("SystemFont_5gu6x")
+font_size = 30
+outline_size = 10
+outline_color = Color(0, 0, 0, 1)
 
 [node name="LOBBY" type="Control"]
 layout_mode = 3
@@ -29,15 +44,14 @@ expand_mode = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 0
-offset_left = 72.0
-offset_top = 238.0
-offset_right = 562.0
+offset_left = 28.0
+offset_top = 277.0
+offset_right = 618.0
 offset_bottom = 430.0
 
 [node name="Label" type="Label" parent="VBoxContainer"]
 layout_mode = 2
-text = "TITULO DO JOGO
-"
+text = "Stronzo Multiplayer"
 label_settings = SubResource("LabelSettings_o1atq")
 horizontal_alignment = 1
 
@@ -48,8 +62,18 @@ offset_top = 356.0
 offset_right = 559.0
 offset_bottom = 438.0
 
-[node name="Button" type="Button" parent="MarginContainer"]
+[node name="host" type="Button" parent="MarginContainer"]
 layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/host"]
+layout_mode = 0
+offset_top = 1.0
+offset_right = 479.0
+offset_bottom = 80.0
+text = "HOST"
+label_settings = SubResource("LabelSettings_q60fs")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="MarginContainer2" type="MarginContainer" parent="."]
 layout_mode = 0
@@ -58,5 +82,18 @@ offset_top = 464.0
 offset_right = 559.0
 offset_bottom = 547.0
 
-[node name="Button" type="Button" parent="MarginContainer2"]
+[node name="join" type="Button" parent="MarginContainer2"]
 layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer2/join"]
+layout_mode = 0
+offset_top = 1.0
+offset_right = 479.0
+offset_bottom = 82.0
+text = "JOIN"
+label_settings = SubResource("LabelSettings_q60fs")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="MarginContainer/host" to="." method="_on_host_pressed"]
+[connection signal="pressed" from="MarginContainer2/join" to="." method="_on_join_pressed"]
